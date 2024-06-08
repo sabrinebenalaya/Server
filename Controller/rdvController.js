@@ -1,10 +1,7 @@
 const RDV = require("../Model/RDV");
 const Patient = require("../Model/Patient");
 const notificationController = require("./notificationController");
-const client = require("twilio")(
-  process.env.ACCOUNTSID,
-  process.env.AUTHTOKENN
-);
+
 
 const moment = require("moment");
 exports.createRDV = async (req, res) => {
@@ -72,16 +69,7 @@ exports.createRDV = async (req, res) => {
         );
         const patientPhoneNumber = "+216" + newPatientInstance.numeroTelephone;
 
-        client.messages
-          .create({
-            body: SMS,
-            from: "+16812532331",
-            to: patientPhoneNumber,
-          })
-          .then((message) => console.log(message.sid))
-          .catch((error) =>
-            console.error("Erreur lors de l'envoi du SMS:", error)
-          );
+       
       }
       return res.status(201).json(rdv);
     }
@@ -212,16 +200,7 @@ L'équipe MediaNet`;
       );
       const patientPhoneNumber = "+216" + newPatientInstance.numeroTelephone;
 
-      client.messages
-        .create({
-          body: SMS,
-          from: "+16812532331",
-          to: patientPhoneNumber,
-        })
-        .then((message) => console.log(message.sid))
-        .catch((error) =>
-          console.error("Erreur lors de l'envoi du SMS:", error)
-        );
+      
     }
 
     const rdvs = await RDV.find({ patient: rdv.patient });
