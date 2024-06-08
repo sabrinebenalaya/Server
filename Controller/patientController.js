@@ -6,7 +6,6 @@ const Ordonnance = require('../Model/Ordonnance');
 const RDV = require('../Model/RDV');
 const jwt = require('jsonwebtoken');
 
-const client = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKENN);
 // Contrôleur pour créer un patient
 patientController.createPatient = async (req, res) => {
   try {
@@ -52,14 +51,7 @@ L'équipe MedicaNet`
       );
       const patientPhoneNumber = "+216" + newPatientInstance.numeroTelephone;
 
-      client.messages
-        .create({
-          body: SMS,
-          from: '+16812532331',
-          to: patientPhoneNumber
-        })
-        .then(message => console.log(message.sid))
-        .catch(error => console.error('Erreur lors de l\'envoi du SMS:', error));
+      
       
       
     }
