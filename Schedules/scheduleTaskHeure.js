@@ -3,7 +3,6 @@ const notification = require('../Controller/notificationController');
 const RDV = require('../Model/RDV');
 const Patient = require('../Model/Patient');
 const moment = require('moment');
-const client = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKENN);
 
 //changer statut et envoyer mail quant le rdv est fait pour informer le patient qu il peut MAJ son ordonnace
 async function statusRDVFait() {
@@ -52,14 +51,7 @@ N'hésitez pas à nous contacter si vous avez des questions ou avez besoin d'ass
 
 Cordialement,
 L'équipe de prise de rendez-vous`
-        client.messages
-          .create({
-            body: SMS,
-            from: '+16812532331',
-            to: patientPhoneNumber
-          })
-          .then(message => console.log(message.sid))
-          .catch(error => console.error('Erreur lors de l\'envoi du SMS:', error));
+      
       }
     }
   } catch (error) {
